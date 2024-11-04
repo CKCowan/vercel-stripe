@@ -23,18 +23,28 @@ export async function createCheckoutSession(
       submit_type: "donate",
       line_items: [
         {
+          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          price: 'price_1NBOoqKYEJ2F60idmG2XixCY',
           quantity: 1,
-          price_data: {
-            currency: CURRENCY,
-            product_data: {
-              name: "Custom amount donation",
-            },
-            unit_amount: formatAmountForStripe(
-              Number(data.get("customDonation") as string),
-              CURRENCY,
-            ),
-          },
         },
+        {
+          price: 'price_1NBOrnKYEJ2F60idD2SXE4jR',
+          quantity: 1
+        }
+
+        // {
+        //   quantity: 1,
+        //   price_data: {
+        //     currency: CURRENCY,
+        //     product_data: {
+        //       name: "Custom amount donation",
+        //     },
+        //     unit_amount: formatAmountForStripe(
+        //       Number(data.get("customDonation") as string),
+        //       CURRENCY,
+        //     ),
+        //   },
+        // },
       ],
       ...(ui_mode === "hosted" && {
         success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
