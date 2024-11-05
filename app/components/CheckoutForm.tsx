@@ -20,6 +20,18 @@ interface CheckoutFormProps {
   uiMode: Stripe.Checkout.SessionCreateParams.UiMode;
 }
 
+function getDiscount( ){
+  let lowestPrice = 28;
+
+  // for (let index = 1; index < cartItemsArray.length; index++) {
+  //   if(cartItemsArray[index].price < lowestPrice){
+  //     lowestPrice = cartItemsArray[index].price
+  //   }
+  // }
+  return lowestPrice;
+}
+const discount = getDiscount();
+
 export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
   const [loading] = useState<boolean>(false);
   const [input, setInput] = useState<{ customDonation: number }>({
@@ -39,7 +51,7 @@ export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
     const uiMode = data.get(
       "uiMode",
     ) as Stripe.Checkout.SessionCreateParams.UiMode;
-    const { client_secret, url } = await createCheckoutSession(data);
+    const { client_secret, url } = await createCheckoutSession(data, discount);
 
     if (uiMode === "embedded") return setClientSecret(client_secret);
 

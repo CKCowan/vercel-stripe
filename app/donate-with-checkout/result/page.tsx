@@ -16,12 +16,25 @@ export default async function ResultPage({
       expand: ["line_items", "payment_intent"],
     });
 
+  // const two_for_one: Boolean = true;
+
+  // const lineItems = checkoutSession.line_items?.data;
+  // if(two_for_one && lineItems){
+  //   for (let index = 0; index < lineItems.length; index++) {
+  //     let item = lineItems[index];
+  //     let price = lineItems[index].amount_subtotal;
+  //     let lowest_price = price;
+  //     if()
+  //   }
+  // }
+
   const paymentIntent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 
   return (
     <>
       <h2>Status: {paymentIntent.status}</h2>
       <h3>Checkout Session response:</h3>
+      <h3>1st Line Item: {checkoutSession.line_items?.data[0].amount_subtotal}</h3>
       <PrintObject content={checkoutSession} />
     </>
   );
