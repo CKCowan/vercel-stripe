@@ -115,6 +115,18 @@ export async function createCheckoutSession(
       mode: "payment",
       submit_type: "donate",
       line_items: lineItems,
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: {
+              amount: 4.99,
+              currency: 'usd',
+            },
+            display_name: 'Ground'
+          }
+        }
+      ],
       discounts: [
         { coupon: coupon.id}
       ],
